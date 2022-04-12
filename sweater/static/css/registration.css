@@ -1,0 +1,17 @@
+body{
+color:white;
+font-family: "lato-regular", Helvetica, Arial, sans-serif;
+background:black;
+}
+header{
+}
+
+.regform
+{
+    color:white;
+    font-family: "lato-regular", Helvetica, Arial, sans-serif;
+}
+.regform input
+{
+    font-family: "lato-regular", Helvetica, Arial, sans-serif;
+}

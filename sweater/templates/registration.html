@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <head>
+	<title>Dreamho.me</title>
+	<meta charset="utf-8">
+	<meta name="description" content="агенство недвижимости"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+
+	<link rel="stylesheet" type="text/css" href="../static/css/reset.css">
+	<link rel="stylesheet" type="text/css" href="../static/css/responsive.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/registration.css">
+
+	<script type="text/javascript" src="../static/js/jquery.js"></script>
+	<script type="text/javascript" src="../static/js/main.js"></script>
+</head>
+<body>
+    <header>
+        <div class="wrapper">
+            <a href="home"><img src="../static/images/logo.png" class="logo" alt="" titl=""/></a>
+            <a href="#" class="hamburger"></a>
+            <nav>
+                <ul>
+                    <li><a href="buy">Купить</a></li>
+                    <li><a href="sell">Продать</a></li>
+                    <li><a href="about">О нас</a></li>
+                    <li><a href="contacts">Контакты</a></li>
+                </ul>
+                <a href="#" class="login_btn">Войти</a>
+            </nav>
+        </div>
+    </header><!--  end header section  -->
+    <div class="regform">
+        <form action="" method="POST" class="regform">
+            <table>
+                <tr>
+                    <td>Логин</td>
+                   <td><input type="text" placeholder="Логин" name="login"></td>
+                </tr>
+                <tr>
+                    <td>Пароль</td>
+                    <td><input type="password" placeholder="Пароль" name="password"></td>
+                </tr>
+                <tr>
+                    <td>Повторите пароль</td>
+                    <td><input type="password" placeholder="Повторите пароль" name="password2"></td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                     <td><input type="email" placeholder="Email" name="email"></td>
+                </tr>
+                <tr>
+                   <td><button>Зарегистрировать</button></td>
+                </tr>
+
+            </table>
+        </form>
+    </div>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul class=flashes>
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+</body>
+</html>
