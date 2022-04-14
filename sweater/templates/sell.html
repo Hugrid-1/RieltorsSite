@@ -1,10 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Продать</title>
+	<title>Продать</title>
+	<meta charset="utf-8">
+	<meta name="description" content="агенство недвижимости"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+
+	<link rel="stylesheet" type="text/css" href="../static/css/reset.css">
+	<link rel="stylesheet" type="text/css" href="../static/css/responsive.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/registration.css">
+
+	<script type="text/javascript" src="../static/js/jquery.js"></script>
+	<script type="text/javascript" src="../static/js/main.js"></script>
 </head>
 <body>
-
+    <header>
+			<div class="wrapper">
+				<a href="#"><img src="../static/images/logo.png" class="logo" alt="" titl=""/></a>
+				<a href="#" class="hamburger"></a>
+				<nav>
+					<ul>
+						<li><a href="buy">Купить</a></li>
+						<li><a href="sell">Продать</a></li>
+						<li><a href="about">О нас</a></li>
+						<li><a href="contacts">Контакты</a></li>
+					</ul>
+					{% if current_user.is_authenticated %}
+					<a href="account" class="profile_btn">{{ current_user.login }}</a>
+					<a onclick="" style="width:auto;" href="logout" class="logout_btn">Выйти из аккаунта</a>
+					{% else %}
+					<a onclick="document.getElementById('id01').style.display='block'" style="width:auto;" href="#" class="login_btn">Войти</a>
+					{% endif %}
+				</nav>
+			</div>
+		</header>
+    <div>
+        <div>
+            <form action="" method="post" enctype="multipart/form-data">
+                <table>
+                    <tr>
+                        <td>Название</td>
+                        <td><input type="text" name="title"></td>
+                    </tr>
+                    <tr>
+                        <td>Цена</td>
+                        <td><input type="text" name="price"></td>
+                    </tr>
+                    <tr>
+                        <td>Площадь в кв.метрах</td>
+                        <td><input type="text" name="area"></td>
+                    </tr>
+                    <tr>
+                        <td>Количество комнат</td>
+                        <td><input type="text" name="roomCount"></td>
+                    </tr>
+                    <tr>
+                        <td>Этаж</td>
+                        <td><input type="text" name="floor"></td>
+                    </tr>
+                    <tr>
+                        <td>Адрес</td>
+                        <td><input type="text" name="address"></td>
+                    </tr>
+                    <tr>
+                        <td>Описание</td>
+                        <td><input type="text" name="description"></td>
+                    </tr>
+                    <tr>
+                        <td>Изображение</td>
+                        <td><input type="file" name="image"></td>
+                    </tr>
+                </table>
+                <button type="submit">Добавить</button>
+            </form>
+            {% with messages = get_flashed_messages() %}
+				  {% if messages %}
+					<ul class=flashes>
+					{% for message in messages %}
+					  <li>{{ message }}</li>
+					{% endfor %}
+					</ul>
+				  {% endif %}
+				{% endwith %}
+        </div>
+    </div>
 </body>
 </html>

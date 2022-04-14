@@ -238,6 +238,7 @@ header nav .profile_btn{
     -moz-transition: background .1s linear;
     -o-transition: background .1s linear;
     font-family: "lato-regular", Helvetica, Arial, sans-serif;
+    text-decoration:none;
 }
 header nav .profile_btn:hover{
     background: #ffb41f;
@@ -256,6 +257,7 @@ header nav .logout_btn{
     -moz-transition: background .1s linear;
     -o-transition: background .1s linear;
     font-family: "lato-regular", Helvetica, Arial, sans-serif;
+    text-decoration:none;
 }
 header nav .logout_btn:hover{
     background: #ab4f56;
@@ -662,6 +664,7 @@ header nav .logout_btn:hover{
 footer{
     padding-top: 100px;
     background: #313830;
+    align-items:center;
 }
 
 footer .footer > ul{
@@ -670,7 +673,7 @@ footer .footer > ul{
 
 footer .footer > ul > li{
     display: block;
-    float: left;
+    float:left;
     list-style: none;
     margin-right: 60px;
 }

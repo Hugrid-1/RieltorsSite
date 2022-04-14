@@ -1,0 +1,17 @@
+.hero{
+background:#313830
+}
+
+.listings{
+    background:white;
+    padding:10px;
+}
+
+.listings wrapper{
+    height:100%;
+    background:white;
+}
+
+.footer{
+    margin-top:10px;
+}

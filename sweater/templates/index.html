@@ -20,7 +20,7 @@
 				<a href="#" class="hamburger"></a>
 				<nav>
 					<ul>
-						<li><a href="buy">Купить</a></li>
+						<li><a href="catalog">Каталог</a></li>
 						<li><a href="sell">Продать</a></li>
 						<li><a href="about">О нас</a></li>
 						<li><a href="contacts">Контакты</a></li>
@@ -48,15 +48,15 @@
 
           <form class="modal-content animate" action="" method="POST">
             <div class="container">
-              <label ><b>Username</b></label>
-              <input type="text" placeholder="Enter Username" name="login" required>
+              <label ><b>Логин</b></label>
+              <input type="text" placeholder="Введите ваш логин" name="login" required>
 
-              <label ><b>Password</b></label>
-              <input type="password" placeholder="Enter Password" name="password" required>
+              <label ><b>Пароль</b></label>
+              <input type="password" placeholder="Ввведите ваш пароль" name="password" required>
 
-              <button type="submit">Login</button>
+              <button type="submit">Войти</button>
               <label>
-                <input type="checkbox" checked="checked" name="remember"> Remember me
+                <input type="checkbox" checked="checked" name="remember"> Запомнить меня
               </label>
               {% with messages = get_flashed_messages() %}
 				  {% if messages %}
@@ -120,114 +120,21 @@
 	<section class="listings">
 		<div class="wrapper">
 			<ul class="properties_list">
-				<li>
-					<a href="#">
-						<img src="../static/images/property_1.jpg" alt="" title="" class="property_img"/>
+
+				{% for realty in realtys %}
+					<li>
+					<a href="buy/{{realty.id}}">
+						<img src="../static/images/{{realty.image}}" alt="" title="" class="property_img"/>
 					</a>
-					<span class="price">$2500</span>
+					<span class="price">{{ realty.price }} руб.</span>
 					<div class="property_details">
 						<h1>
-							<a href="#">Fuisque dictum tortor at purus libero</a>
+							<a href="buy/{{realty.id}}">{{ realty.title }}</a>
 						</h1>
-						<h2>2 kitchens, 2 bed, 2 bath... <span class="property_size">(288ftsq)</span></h2>
+						<h2>{{ realty.area }} кв. метров<span class="property_size"></span></h2>
 					</div>
 				</li>
-				<li>
-					<a href="#">
-						<img src="../static/images/property_2.jpg" alt="" title="" class="property_img"/>
-					</a>
-					<span class="price">$1000</span>
-					<div class="property_details">
-						<h1>
-							<a href="#">Fuisque dictum tortor at purus libero</a>
-						</h1>
-						<h2>2 kitchens, 2 bed, 2 bath... <span class="property_size">(288ftsq)</span></h2>
-					</div>
-				</li>
-				<li>
-					<a href="#">
-						<img src="../static/images/property_3.jpg" alt="" title="" class="property_img"/>
-					</a>
-					<span class="price">$500</span>
-					<div class="property_details">
-						<h1>
-							<a href="#">Fuisque dictum tortor at purus libero</a>
-						</h1>
-						<h2>2 kitchens, 2 bed, 2 bath... <span class="property_size">(288ftsq)</span></h2>
-					</div>
-				</li>
-				<li>
-					<a href="#">
-						<img src="../static/images/property_1.jpg" alt="" title="" class="property_img"/>
-					</a>
-					<span class="price">$2500</span>
-					<div class="property_details">
-						<h1>
-							<a href="#">Fuisque dictum tortor at purus libero</a>
-						</h1>
-						<h2>2 kitchens, 2 bed, 2 bath... <span class="property_size">(288ftsq)</span></h2>
-					</div>
-				</li>
-				<li>
-					<a href="#">
-						<img src="../static/images/property_2.jpg" alt="" title="" class="property_img"/>
-					</a>
-					<span class="price">$1000</span>
-					<div class="property_details">
-						<h1>
-							<a href="#">Fuisque dictum tortor at purus libero</a>
-						</h1>
-						<h2>2 kitchens, 2 bed, 2 bath... <span class="property_size">(288ftsq)</span></h2>
-					</div>
-				</li>
-				<li>
-					<a href="#">
-						<img src="../static/images/property_3.jpg" alt="" title="" class="property_img"/>
-					</a>
-					<span class="price">$500</span>
-					<div class="property_details">
-						<h1>
-							<a href="#">Fuisque dictum tortor at purus libero</a>
-						</h1>
-						<h2>2 kitchens, 2 bed, 2 bath... <span class="property_size">(288ftsq)</span></h2>
-					</div>
-				</li>
-				<li>
-					<a href="#">
-						<img src="../static/images/property_1.jpg" alt="" title="" class="property_img"/>
-					</a>
-					<span class="price">$2500</span>
-					<div class="property_details">
-						<h1>
-							<a href="#">Fuisque dictum tortor at purus libero</a>
-						</h1>
-						<h2>2 kitchens, 2 bed, 2 bath... <span class="property_size">(288ftsq)</span></h2>
-					</div>
-				</li>
-				<li>
-					<a href="#">
-						<img src="../static/images/property_2.jpg" alt="" title="" class="property_img"/>
-					</a>
-					<span class="price">$1000</span>
-					<div class="property_details">
-						<h1>
-							<a href="#">Fuisque dictum tortor at purus libero</a>
-						</h1>
-						<h2>2 kitchens, 2 bed, 2 bath... <span class="property_size">(288ftsq)</span></h2>
-					</div>
-				</li>
-				<li>
-					<a href="#">
-						<img src="../static/images/property_3.jpg" alt="" title="" class="property_img"/>
-					</a>
-					<span class="price">$500</span>
-					<div class="property_details">
-						<h1>
-							<a href="#">Fuisque dictum tortor at purus libero</a>
-						</h1>
-						<h2>2 kitchens, 2 bed, 2 bath... <span class="property_size">(288ftsq)</span></h2>
-					</div>
-				</li>
+				{% endfor %}
 			</ul>
 			<div class="more_listing">
 				<a href="#" class="more_listing_btn">Показать больше предложений</a>
@@ -242,29 +149,7 @@
 					<ul>
 						<li><a href="#">О нас</a></li>
 						<li><a href="#">Помощь</a></li>
-						<li><a href="#">Terms</a></li>
-						<li><a href="#">Policy</a></li>
-						<li><a href="#">Contact</a></li>
-					</ul>
-				</li>
-
-				<li class="links">
-					<ul>
-						<li><a href="#">Appartements</a></li>
-						<li><a href="#">Houses</a></li>
-						<li><a href="#">Villas</a></li>
-						<li><a href="#">Mansions</a></li>
-						<li><a href="#">...</a></li>
-					</ul>
-				</li>
-
-				<li class="links">
-					<ul>
-						<li><a href="#">New York</a></li>
-						<li><a href="#">Los Anglos</a></li>
-						<li><a href="#">Miami</a></li>
-						<li><a href="#">Washington</a></li>
-						<li><a href="#">...</a></li>
+						<li><a href="#">Контакты</a></li>
 					</ul>
 				</li>
 
@@ -281,7 +166,7 @@
 		</div>
 
 		<div class="copyrights wrapper">
-			Copyright © 2021 . All Rights Reserved.
+			Copyright © 2021. All Rights Reserved.
 		</div>
 	</footer><!--  end footer  -->
 
