@@ -14,7 +14,7 @@ background:black;
 .container img{
     width:50%;
 }
-.container button{
+.container .submit_button{
     margin-top:30px;
     padding: 10px 30px 11px 30px;
     border: 2px solid #ffffff;
@@ -28,13 +28,13 @@ background:black;
     text-decoration:none;
     cursor: pointer;
 }
-.container button:hover{
+.container .submit_button:hover{
     border: 2px solid green;
     background:green;
     color:black;
     cursor: pointer;
 }
-.container button:active{
+.container .submit_button:active{
     border: 2px solid green;
     background:green;
     color:black;

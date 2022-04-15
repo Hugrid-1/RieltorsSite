@@ -1,6 +1,6 @@
 import os
 
-from flask_login import login_user, login_required, logout_user
+from flask_login import login_user, login_required, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
 
@@ -21,11 +21,12 @@ def allowed_file(filename):
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/home', methods=['GET', 'POST'])
 def mainPage():
+    print(current_user.get_id())
     login = request.form.get('login')
     password = request.form.get('password')
-    modalIsActive = False;
+    modalIsActive = False
 
-    realtys = Realty.query.limit(9).all()
+    realtys = Realty.query.filter_by(is_for_sale=True).limit(9).all()
 
     if login and password:
         user = User.query.filter_by(login=login).first()
@@ -54,18 +55,27 @@ def contactsPage():
 
 @app.route('/catalog')
 def catalog():
-    realtys = Realty.query.limit(9).all()
+    realtys = Realty.query.filter_by(is_for_sale=True).all()
     return render_template("catalog.html",realtys=realtys)
-@app.route('/buy/<id>')
+
+@app.route('/buy/<id>', methods=['GET','POST'])
 @login_required
-def buyPage(id):
+def buyPage(id): #Страница квартиры при покупке
     realty = Realty.query.filter_by(id=id).first()
-    return render_template("buy.html",realty=realty)
+    if request.method == 'POST':
+        if request.form['submit_button'] == 'buy' or request.form['submit_button'] == 'withdraw from sale':
+            realty.owner_id = current_user.get_id()
+            realty.is_for_sale = False
+            db.session.commit()
+        elif request.form['submit_button'] == 'sell':
+            realty.is_for_sale = True
+            db.session.commit()
+    return render_template("realty.html",realty=realty)
 
 
 @app.route('/sell', methods=["POST", "GET"])
 @login_required
-def sellPage():
+def addRealtyForSalePage():
     title = request.form.get("title")
     price = request.form.get("price")
     area = request.form.get("area")
@@ -80,7 +90,7 @@ def sellPage():
 
         if not (title or price or area or roomCount or floor or address or imageFile):  # проверка на наличие всех полей
             flash('Заполните все необходимые поля!')
-            return redirect(url_for('sellPage'))
+            return redirect(url_for('addRealtyForSalePage'))
 
         else:
             if imageFile and allowed_file(imageFile.filename):  # проверка на наличие файла
@@ -88,13 +98,13 @@ def sellPage():
                 imageFile.save(os.path.join(app.config['UPLOAD_FOLDER'], imageFilename),buffer_size=16384)
                 imageFile.close()
                 new_realty = Realty(title=title, price=price, area=area, roomCount=roomCount, floor=floor, address=address,
-                                    description=description,image=imageFilename)
+                                    description=description,image=imageFilename,owner_id = current_user.get_id(),is_for_sale=True)
                 db.session.add(new_realty)
                 db.session.commit()
                 flash('Успешно добавлено')
-                return redirect(url_for('download_file',name=imageFilename))
+                return redirect(url_for('addRealtyForSalePage'))
             flash('Файл некорректен!')
-            return redirect(url_for('sellPage'))
+            return redirect(url_for('addRealtyForSalePage'))
 
     return render_template("sell.html")
 @app.route('/uploads/<name>')
@@ -129,7 +139,8 @@ def registrationPage():
 @app.route('/account')
 @login_required
 def profilePage():
-    return render_template("accountpage.html")
+    user_realtys = Realty.query.filter_by(owner_id = current_user.get_id()).all()
+    return render_template("accountpage.html",user_realtys=user_realtys)
 
 
 @manager.user_loader

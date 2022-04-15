@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <head>
+	<title>Покупка</title>
+	<meta charset="utf-8">
+	<meta name="description" content="агенство недвижимости"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+
+	<link rel="stylesheet" type="text/css" href="../static/css/reset.css">
+	<link rel="stylesheet" type="text/css" href="../static/css/responsive.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/buy.css">
+
+	<script type="text/javascript" src="../static/js/jquery.js"></script>
+	<script type="text/javascript" src="../static/js/main.js"></script>
+</head>
+<body>
+    <header>
+        <div class="wrapper">
+            <a href="../home"><img src="../static/images/logo.png" class="logo" alt="" titl=""/></a>
+            <a href="#" class="hamburger"></a>
+            <nav>
+                <ul>
+                    <li><a href="buy">Купить</a></li>
+                    <li><a href="sell">Продать</a></li>
+                    <li><a href="about">О нас</a></li>
+                    <li><a href="contacts">Контакты</a></li>
+                    {% if current_user.is_authenticated %}
+					<a href="../account" class="profile_btn">{{ current_user.login }}</a>
+					<a onclick="" style="width:auto;" href="logout" class="logout_btn">Выйти из аккаунта</a>
+					{% else %}
+					<a onclick="document.getElementById('id01').style.display='block'" style="width:auto;" href="#" class="login_btn">Войти</a>
+					{% endif %}
+                </ul>
+                <a href="#" class="login_btn">Войти</a>
+            </nav>
+        </div>
+    </header>
+    <div>
+        <div class="container">
+            <form method="post">
+                <img src="../static/images/{{realty.image}}"></img>
+                <p>ID</p>
+                <h3>{{realty.id}}</h3>
+                <p>Название</p>
+                <h3>{{realty.title}}</h3>
+                <p>Цена</p>
+                <h3>{{realty.price}}</h3>
+                <p>Кол-во комнат</p>
+                <h3>{{realty.roomCount}}</h3>
+                <p>Площадь</p>
+                <h3>{{realty.area}}</h3>
+                <p>Этаж</p>
+                <h3>{{realty.floor}}</h3>
+                <p>Адресс</p>
+                <h3>{{realty.address}}</h3>
+                <p>Описание:</p>
+                <h4>{{realty.description}}</h4>
+                {% if realty.is_for_sale == False and realty.owner_id == current_user.id%}
+                <input class="submit_button" type="submit" name="submit_button"  value="sell">
+                {% elif realty.is_for_sale == True and realty.owner_id == current_user.id%}
+                <input class="submit_button" type="submit" name="submit_button" value="withdraw from sale">
+                {% elif realty.is_for_sale %}
+                <input class="submit_button" type="submit" name="submit_button" value="buy">
+                {% endif %}
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>
