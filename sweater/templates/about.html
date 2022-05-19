@@ -1,105 +1,89 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <title>О нас</title>
+	<title>Dreamho.me</title>
+	<meta charset="utf-8">
+	<meta name="description" content="агенство недвижимости"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+
+	<link rel="stylesheet" type="text/css" href="../static/css/reset.css">
+	<link rel="stylesheet" type="text/css" href="../static/css/responsive.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/catalog.css">
+
+	<script type="text/javascript" src="../static/js/jquery.js"></script>
+	<script type="text/javascript" src="../static/js/main.js"></script>
 </head>
 <body>
-    <li>
-					<a href="#">
-						<img src="../static/images/property_2.jpg" alt="" title="" class="property_img"/>
-					</a>
-					<span class="price">$1000</span>
-					<div class="property_details">
-						<h1>
-							<a href="#">Fuisque dictum tortor at purus libero</a>
-						</h1>
-						<h2>2 kitchens, 2 bed, 2 bath... <span class="property_size">(288ftsq)</span></h2>
-					</div>
+<section class="hero">
+		<header>
+			<div class="wrapper">
+				<a href="#"><img src="../static/images/logo.png" class="logo" alt="" titl=""/></a>
+				<a href="#" class="hamburger"></a>
+				<nav>
+					<ul>
+						<li><a href="catalog">Каталог</a></li>
+						<li><a href="top">Топ пользователей</a></li>
+						{% if current_user.is_authenticated %}
+						<li><a href="{{url_for('addRealtyForSalePage')}}">Добавить квартиру</a></li>
+						{% endif %}
+						<li><a href="about">О нас</a></li>
+						<li><a href="contacts">Контакты</a></li>
+					</ul>
+					{% if current_user.is_authenticated %}
+					<a href="account" class="profile_btn">{{ current_user.login }}</a>
+					<a onclick="" style="width:auto;" href="logout" class="logout_btn">Выйти из аккаунта</a>
+					{% else %}
+					<a onclick="document.getElementById('id01').style.display='block'" style="width:auto;" href="{{url_for('loginPage')}}" class="login_btn">Войти</a>
+					{% endif %}
+				</nav>
+			</div>
+		</header><!--  end header section  --><!--  end header section  -->
+
+
+
+	<section class="listings">
+		<div class="wrapper">
+            <h3>Агентство недвижимости № 1 по данным СбербанкаЛидер продаж по ипотечному кредитованию по итогам 2021 года.
+				Сбербанк подтверждает, что компания «Этажи» является лидером продаж недвижимости,
+				среди агентств недвижимости, а также является ТОП №1 в РФ среди партнеров банка.
+				</h3>
+            <br>
+            <h3>Мало какая риэлторская фирма может сравниться по количеству объявлений в базе,
+				организации работы с применением ИТ и качеству обслуживания</h3>
+            <br>
+            <h3>Адрес - Ленинский проспект, 44</h3>
+            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+			<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        </div>
+	</section>	<!--  end listing section  -->
+
+	<footer>
+		<div class="wrapper footer">
+			<ul>
+				<li class="links">
+					<ul>
+						<li><a href="#">О нас</a></li>
+						<li><a href="#">Помощь</a></li>
+						<li><a href="#">Контакты</a></li>
+					</ul>
 				</li>
-				<li>
-					<a href="#">
-						<img src="../static/images/property_3.jpg" alt="" title="" class="property_img"/>
-					</a>
-					<span class="price">$500</span>
-					<div class="property_details">
-						<h1>
-							<a href="#">Fuisque dictum tortor at purus libero</a>
-						</h1>
-						<h2>2 kitchens, 2 bed, 2 bath... <span class="property_size">(288ftsq)</span></h2>
-					</div>
+
+				<li class="about">
+					<p>Dreamho.me - агенство недвижимости твоей мечты</p>
+					<ul>
+						<li><a href="http://facebook.com/pixelhint" class="facebook" target="_blank"></a></li>
+						<li><a href="http://twitter.com/pixelhint" class="twitter" target="_blank"></a></li>
+						<li><a href="http://plus.google.com/+Pixelhint" class="google" target="_blank"></a></li>
+						<li><a href="#" class="skype"></a></li>
+					</ul>
 				</li>
-				<li>
-					<a href="#">
-						<img src="../static/images/property_1.jpg" alt="" title="" class="property_img"/>
-					</a>
-					<span class="price">$2500</span>
-					<div class="property_details">
-						<h1>
-							<a href="#">Fuisque dictum tortor at purus libero</a>
-						</h1>
-						<h2>2 kitchens, 2 bed, 2 bath... <span class="property_size">(288ftsq)</span></h2>
-					</div>
-				</li>
-				<li>
-					<a href="#">
-						<img src="../static/images/property_2.jpg" alt="" title="" class="property_img"/>
-					</a>
-					<span class="price">$1000</span>
-					<div class="property_details">
-						<h1>
-							<a href="#">Fuisque dictum tortor at purus libero</a>
-						</h1>
-						<h2>2 kitchens, 2 bed, 2 bath... <span class="property_size">(288ftsq)</span></h2>
-					</div>
-				</li>
-				<li>
-					<a href="#">
-						<img src="../static/images/property_3.jpg" alt="" title="" class="property_img"/>
-					</a>
-					<span class="price">$500</span>
-					<div class="property_details">
-						<h1>
-							<a href="#">Fuisque dictum tortor at purus libero</a>
-						</h1>
-						<h2>2 kitchens, 2 bed, 2 bath... <span class="property_size">(288ftsq)</span></h2>
-					</div>
-				</li>
-				<li>
-					<a href="#">
-						<img src="../static/images/property_1.jpg" alt="" title="" class="property_img"/>
-					</a>
-					<span class="price">$2500</span>
-					<div class="property_details">
-						<h1>
-							<a href="#">Fuisque dictum tortor at purus libero</a>
-						</h1>
-						<h2>2 kitchens, 2 bed, 2 bath... <span class="property_size">(288ftsq)</span></h2>
-					</div>
-				</li>
-				<li>
-					<a href="#">
-						<img src="../static/images/property_2.jpg" alt="" title="" class="property_img"/>
-					</a>
-					<span class="price">$1000</span>
-					<div class="property_details">
-						<h1>
-							<a href="#">Fuisque dictum tortor at purus libero</a>
-						</h1>
-						<h2>2 kitchens, 2 bed, 2 bath... <span class="property_size">(288ftsq)</span></h2>
-					</div>
-				</li>
-				<li>
-					<a href="#">
-						<img src="../static/images/property_3.jpg" alt="" title="" class="property_img"/>
-					</a>
-					<span class="price">$500</span>
-					<div class="property_details">
-						<h1>
-							<a href="#">Fuisque dictum tortor at purus libero</a>
-						</h1>
-						<h2>2 kitchens, 2 bed, 2 bath... <span class="property_size">(288ftsq)</span></h2>
-					</div>
-				</li>
+			</ul>
+		</div>
+
+		<div class="copyrights wrapper">
+			Copyright © 2021. All Rights Reserved.
+		</div>
+	</footer><!--  end footer  -->
+
 </body>
 </html>

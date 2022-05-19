@@ -17,12 +17,15 @@
 	<section class="hero">
 		<header>
 			<div class="wrapper">
-				<a href=home><img src="../static/images/logo.png" class="logo" alt="" titl=""/></a>
+				<a href="#"><img src="../static/images/logo.png" class="logo" alt="" titl=""/></a>
 				<a href="#" class="hamburger"></a>
 				<nav>
 					<ul>
-						<li><a href="buy">Купить</a></li>
-						<li><a href="sell">Продать</a></li>
+						<li><a href="catalog">Каталог</a></li>
+						<li><a href="top">Топ пользователей</a></li>
+						{% if current_user.is_authenticated %}
+						<li><a href="{{url_for('addRealtyForSalePage')}}">Добавить квартиру</a></li>
+						{% endif %}
 						<li><a href="about">О нас</a></li>
 						<li><a href="contacts">Контакты</a></li>
 					</ul>
@@ -30,7 +33,7 @@
 					<a href="account" class="profile_btn">{{ current_user.login }}</a>
 					<a onclick="" style="width:auto;" href="logout" class="logout_btn">Выйти из аккаунта</a>
 					{% else %}
-					<a onclick="document.getElementById('id01').style.display='block'" style="width:auto;" href="#" class="login_btn">Войти</a>
+					<a onclick="document.getElementById('id01').style.display='block'" style="width:auto;" href="{{url_for('loginPage')}}" class="login_btn">Войти</a>
 					{% endif %}
 				</nav>
 			</div>

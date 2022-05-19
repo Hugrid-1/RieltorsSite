@@ -76,7 +76,7 @@ body{
 }
 
 .wrapper{
-    max-width: 1100px;
+    max-width: 1500px;
     margin: 0 auto;
     position: relative;
 }
@@ -544,8 +544,8 @@ header nav .logout_btn:hover{
 }
 
 .listings ul.properties_list li img.property_img{
-    width: 100%;
-    height: auto!important;
+    width: 600px;
+    height: 400px;
     vertical-align: top;
 }
 
@@ -799,7 +799,7 @@ footer .copyrights a.ph_link{
 @media (max-width: 1150px){
     .wrapper{
         padding: 0 40px;
-        max-width: 1020px;
+        max-width: 1500px;
     }
     .search .advanced_search .arrow{
         top: -8px;

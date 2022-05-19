@@ -15,39 +15,50 @@
 </head>
 <body>
     <header>
-        <div class="wrapper">
-            <a href="../home"><img src="../static/images/logo.png" class="logo" alt="" titl=""/></a>
-            <a href="#" class="hamburger"></a>
-            <nav>
-                <ul>
-                    <li><a href="buy">Купить</a></li>
-                    <li><a href="sell">Продать</a></li>
-                    <li><a href="about">О нас</a></li>
-                    <li><a href="contacts">Контакты</a></li>
-                    {% if current_user.is_authenticated %}
+			<div class="wrapper">
+				<a href="#"><img src="../static/images/logo.png" class="logo" alt="" titl=""/></a>
+				<a href="#" class="hamburger"></a>
+				<nav>
+					<ul>
+						<li><a href="catalog">Каталог</a></li>
+						<li><a href="top">Топ пользователей</a></li>
+						{% if current_user.is_authenticated %}
+						<li><a href="{{url_for('addRealtyForSalePage')}}">Добавить квартиру</a></li>
+						{% endif %}
+						<li><a href="about">О нас</a></li>
+						<li><a href="contacts">Контакты</a></li>
+					</ul>
+					{% if current_user.is_authenticated %}
 					<a href="account" class="profile_btn">{{ current_user.login }}</a>
 					<a onclick="" style="width:auto;" href="logout" class="logout_btn">Выйти из аккаунта</a>
 					{% else %}
-					<a onclick="document.getElementById('id01').style.display='block'" style="width:auto;" href="#" class="login_btn">Войти</a>
+					<a onclick="document.getElementById('id01').style.display='block'" style="width:auto;" href="{{url_for('loginPage')}}" class="login_btn">Войти</a>
 					{% endif %}
-                </ul>
-            </nav>
-        </div>
-    </header>
+				</nav>
+			</div>
+		</header><!--  end header section  -->
     {% if current_user.is_authenticated %}
 
     <div class="profile">
         <div class="container">
             <h1> Логин - {{ current_user.login }}</h1>
             <h1> Email - {{ current_user.email }}</h1>
-            <h1> Покупки : ..........</h1>
+            <h1> Покупки : </h1>
+			{% for buy in user_buys_list %}
+			<h2>Покупка №{{buy.id}}</h2>
+			<h2>Дата покупки - {{buy.date_sale}}</h2>
+			<h2>ID недвижимости - {{buy.realty_id}}</h2>
+			<br>
+			{% endfor %}
             <h1> Ваша недвижимость : </h1>
-            <div class="realtys_list">
-                {% for realty in user_realtys %}
-                <a href="buy/{{realty.id}}">{{ realty.title }} - {{ realty.price }} руб.</a>
-                {% endfor %}
-            </div>
+			<div class="container">
+				{% for realty in user_realtys %}
+				<div class="realtys_list">
+					<a href="buy/{{realty.id}}">{{ realty.title }} - {{ realty.price }} руб.</a>
 
+				</div>
+				{% endfor %}
+			</div>
         </div>
     </div>
 

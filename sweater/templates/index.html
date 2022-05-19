@@ -21,7 +21,10 @@
 				<nav>
 					<ul>
 						<li><a href="catalog">Каталог</a></li>
-						<li><a href="sell">Продать</a></li>
+						<li><a href="top">Топ пользователей</a></li>
+						{% if current_user.is_authenticated %}
+						<li><a href="{{url_for('addRealtyForSalePage')}}">Добавить квартиру</a></li>
+						{% endif %}
 						<li><a href="about">О нас</a></li>
 						<li><a href="contacts">Контакты</a></li>
 					</ul>
@@ -29,52 +32,12 @@
 					<a href="account" class="profile_btn">{{ current_user.login }}</a>
 					<a onclick="" style="width:auto;" href="logout" class="logout_btn">Выйти из аккаунта</a>
 					{% else %}
-					<a onclick="document.getElementById('id01').style.display='block'" style="width:auto;" href="#" class="login_btn">Войти</a>
+					<a onclick="document.getElementById('id01').style.display='block'" style="width:auto;" href="{{url_for('loginPage')}}" class="login_btn">Войти</a>
 					{% endif %}
 				</nav>
 			</div>
 		</header><!--  end header section  -->
 
-		{% if modalIsActive %}
-			<script>
-			$(function() {
-			document.getElementById('id01').style.display='block'
-			});
-			</script>
-		{% endif %}
-
-        <!--Modal window -->
-        <div id="id01" class="modal">
-
-          <form class="modal-content animate" action="" method="POST">
-            <div class="container">
-              <label ><b>Логин</b></label>
-              <input type="text" placeholder="Введите ваш логин" name="login" required>
-
-              <label ><b>Пароль</b></label>
-              <input type="password" placeholder="Ввведите ваш пароль" name="password" required>
-
-              <button type="submit">Войти</button>
-              <label>
-                <input type="checkbox" checked="checked" name="remember"> Запомнить меня
-              </label>
-              {% with messages = get_flashed_messages() %}
-				  {% if messages %}
-					<ul class=flashes>
-					{% for message in messages %}
-					  <li>{{ message }}</li>
-					{% endfor %}
-					</ul>
-				  {% endif %}
-				{% endwith %}
-				<a href="registration">Регистрация</a>
-            </div>
-              <br>
-              <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
-          </form>
-        </div>
-        <!--End m -->
-        
 			<section class="caption">
 				<h2 class="caption">Найдите дом своей мечты</h2>
 				<h3 class="properties">Квартиры - Дома - Особняки</h3>
