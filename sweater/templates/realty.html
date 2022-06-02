@@ -20,13 +20,13 @@
 				<a href="{{url_for('mainPage')}}" class="hamburger"></a>
 				<nav>
 					<ul>
-						<li><a href="catalog">Каталог</a></li>
-						<li><a href="top">Топ пользователей</a></li>
+						<li><a href="{{url_for('catalog')}}">Каталог</a></li>
+						<li><a href="{{url_for('topUsers')}}">Топ пользователей</a></li>
 						{% if current_user.is_authenticated %}
 						<li><a href="{{url_for('addRealtyForSalePage')}}">Добавить квартиру</a></li>
 						{% endif %}
-						<li><a href="about">О нас</a></li>
-						<li><a href="contacts">Контакты</a></li>
+						<li><a href="{{url_for('aboutPage')}}">О нас</a></li>
+						<li><a href="{{url_for('contactsPage')}}">Контакты</a></li>
 					</ul>
 					{% if current_user.is_authenticated %}
 					<a href="{{url_for('profilePage')}}" class="profile_btn">{{ current_user.login }}</a>
@@ -39,30 +39,30 @@
 		</header><!--  end header section  -->
     <div>
         <div class="container">
-            <form method="post">
+            <form method="post" style="color: honeydew">
                 <img src="../static/images/{{realty.image}}"></img>
                 <p>ID</p>
-                <h3>{{realty.id}}</h3>
+                <h3 style="color: honeydew">{{realty.id}}</h3>
                 <p>Название</p>
-                <h3>{{realty.title}}</h3>
+                <h3 style="color: honeydew">{{realty.title}}</h3>
                 <p>Цена</p>
-                <h3>{{realty.price}}</h3>
+                <h3 style="color: honeydew">{{realty.price}} Руб.</h3>
                 <p>Кол-во комнат</p>
-                <h3>{{realty.roomCount}}</h3>
+                <h3 style="color: honeydew">{{realty.roomCount}}</h3>
                 <p>Площадь</p>
-                <h3>{{realty.area}}</h3>
+                <h3 style="color: honeydew">{{realty.area}} квадратных метров</h3>
                 <p>Этаж</p>
-                <h3>{{realty.floor}}</h3>
+                <h3 style="color: honeydew">{{realty.floor}}</h3>
                 <p>Адрес</p>
-                <h3>{{realty.address}}</h3>
+                <h3 style="color: honeydew">{{realty.address}}</h3>
                 <p>Описание:</p>
-                <h4>{{realty.description}}</h4>
+                <h4 style="color: honeydew;line-height: 1.75;">{{realty.description}}</h4>
                 {% if realty.is_for_sale == False and realty.owner_id == current_user.id%}
-                <input class="submit_button" type="submit" name="submit_button"  value="sell">
+                <input class="submit_button" type="submit" name="submit_button"  value="Продать">
                 {% elif realty.is_for_sale == True and realty.owner_id == current_user.id%}
-                <input class="submit_button" type="submit" name="submit_button" value="withdraw from sale">
+                <input class="submit_button" type="submit" name="submit_button" value="Снять с продажи">
                 {% elif realty.is_for_sale %}
-                <input class="submit_button" type="submit" name="submit_button" value="buy">
+                <input class="submit_button" type="submit" name="submit_button" value="Купить">
                 {% endif %}
             </form>
         </div>

@@ -21,13 +21,13 @@
 				<a href="{{url_for('mainPage')}}" class="hamburger"></a>
 				<nav>
 					<ul>
-						<li><a href="catalog">Каталог</a></li>
-						<li><a href="top">Топ пользователей</a></li>
+						<li><a href="{{url_for('catalog')}}">Каталог</a></li>
+						<li><a href="{{url_for('topUsers')}}">Топ пользователей</a></li>
 						{% if current_user.is_authenticated %}
 						<li><a href="{{url_for('addRealtyForSalePage')}}">Добавить квартиру</a></li>
 						{% endif %}
-						<li><a href="about">О нас</a></li>
-						<li><a href="contacts">Контакты</a></li>
+						<li><a href="{{url_for('aboutPage')}}">О нас</a></li>
+						<li><a href="{{url_for('contactsPage')}}">Контакты</a></li>
 					</ul>
 					{% if current_user.is_authenticated %}
 					<a href="{{url_for('profilePage')}}" class="profile_btn">{{ current_user.login }}</a>
@@ -37,7 +37,7 @@
 					{% endif %}
 				</nav>
 			</div>
-		</header><!--  end header section  -->
+		</header><!--  end header section  --><!--  end header section  -->
 
 
 

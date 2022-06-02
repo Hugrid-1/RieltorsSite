@@ -76,17 +76,17 @@ def catalog():
 def buyPage(id): #Страница квартиры при покупке
     realty = Realty.query.filter_by(id=id).first()
     if request.method == 'POST':
-        if request.form['submit_button'] == 'buy':
+        if request.form['submit_button'] == 'Купить':
             realty.owner_id = current_user.get_id()
             realty.is_for_sale = False
             new_sale = Sale(buyer_id=current_user.get_id(),realty_id=realty.id,date_sale=datetime.date.today())
             db.session.add(new_sale)
             db.session.commit()
-        if request.form['submit_button'] == 'withdraw from sale':
+        if request.form['submit_button'] == 'Снять с продажи':
             realty.owner_id = current_user.get_id()
             realty.is_for_sale = False
             db.session.commit()
-        elif request.form['submit_button'] == 'sell':
+        elif request.form['submit_button'] == 'Продать':
             realty.is_for_sale = True
             db.session.commit()
     return render_template("realty.html",realty=realty)
