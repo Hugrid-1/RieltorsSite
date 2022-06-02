@@ -22,7 +22,7 @@ def allowed_file(filename):
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/home', methods=['GET', 'POST'])
 def mainPage():
-    print(current_user.get_id())
+    # print(current_user.get_id())
     realtys = Realty.query.filter_by(is_for_sale=True).limit(9).all()
 
     return render_template("index.html", realtys=realtys)
@@ -34,9 +34,11 @@ def passwordCorrectCheck(password): # проверка пароля
         return False
     alphaCounter = 0 #счетчик букв
     for i in password:
-        if i.isalpha() and alphaCounter < 4:
+        if i.isalpha() and alphaCounter <= 3:
             alphaCounter += 1 #увеличение счетчика
-        elif alphaCounter > 6:
+            print(i)
+            print(alphaCounter)
+        elif alphaCounter >= 4:
             checkStatus = True
             return checkStatus #выход из цикла при наборе нужного количества букв
     print("Символов недостаточно")
@@ -51,9 +53,22 @@ def aboutPage():
 def contactsPage():
     return render_template("contacts.html")
 
-@app.route('/catalog')
+@app.route('/catalog',methods=['GET','POST'])
 def catalog():
     realtys = Realty.query.filter_by(is_for_sale=True).all()
+    minPrice = request.form.get('min_price')
+
+    maxPrice = request.form.get('max_price')
+
+    print(request.form)
+    if request.method == "POST" and minPrice and maxPrice:
+        minPrice = int(minPrice)
+
+        maxPrice = int(maxPrice)
+        # minPrice=minPrice + 1
+        # maxPrice=maxPrice + 1
+        realtys = Realty.query.filter(Realty.price<maxPrice, Realty.price>minPrice).all()
+
     return render_template("catalog.html",realtys=realtys)
 
 @app.route('/buy/<id>', methods=['GET','POST'])
@@ -123,18 +138,21 @@ def registrationPage():
 
     if request.method == 'POST':
         if not (login or password or password2 or email):  # проверка на наличие всех полей
-            flash('Please, fill all fields!')
+            flash('Заполните все поля!')
         elif password != password2:
-            flash('Passwords are not equal!')
+            flash('Пароли не одинаковые!')
         elif not passwordCorrectCheck(password):
             flash('Пароль не соответствует требованиям, пароль должен быть не меньше 8 символов в длину  и иметь хотя бы 6 букв')
         else:
             hash_pwd = generate_password_hash(password)  # Хеширование пароля
             new_user = User(login=login, password=hash_pwd, email=email)
+            print(f"Зарегистрирован {new_user.login}")
+            # login_user(new_user)
             db.session.add(new_user)
             db.session.commit()
 
-            return redirect(url_for('mainPage'))
+            realtys = Realty.query.filter_by(is_for_sale=True).limit(9).all()
+            return render_template("index.html",realtys=realtys)
     return render_template("registration.html")
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -147,7 +165,8 @@ def loginPage():
             login_user(user)
             next_page = request.args.get('next')
             print(next_page)
-            return render_template("index.html")
+            realtys = Realty.query.filter_by(is_for_sale=True).limit(9).all()
+            return render_template("index.html", realtys=realtys)
         else:
             flash('Логин или пароль некорректен')
     return render_template("login.html")

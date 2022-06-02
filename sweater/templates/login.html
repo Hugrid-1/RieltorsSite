@@ -37,27 +37,33 @@
 					{% endif %}
 				</nav>
 			</div>
-		</header><!--  end header section  -->
+		</header>
+    <!--  end header section  -->
     <div class="loginform">
         <form action="" method="POST" class="regform">
             <table>
                 <tr>
                     <td>Логин</td>
+                    <!--  Поле ввода логина  -->
                    <td><input type="text" placeholder="Логин" name="login"></td>
                 </tr>
                 <tr>
                     <td>Пароль</td>
+                    <!--  Поле ввода пароля  -->
                     <td><input type="password" placeholder="Пароль" name="password"></td>
                 </tr>
                 <tr>
+                    <!--  Кнопка входа  -->
                    <td><button>Войти</button></td>
                 </tr>
                 <tr>
+                    <!--  Кнопка для регистрации  -->
                    <td><a href="{{url_for('registrationPage')}}">Регистрация</a></td>
                 </tr>
             </table>
         </form>
     </div>
+    <!--  Вывод критических сообщений  -->
     {% with messages = get_flashed_messages() %}
       {% if messages %}
         <ul class=flashes>

@@ -41,9 +41,11 @@
 
     <div class="profile">
         <div class="container">
+			<!--  Вывод данных пользователя  -->
             <h1> Логин - {{ current_user.login }}</h1>
             <h1> Email - {{ current_user.email }}</h1>
             <h1> Покупки : </h1>
+			<!--  Вывод покупок пользователя  -->
 			{% for buy in user_buys_list %}
 			<h2>Покупка №{{buy.id}}</h2>
 			<h2>Дата покупки - {{buy.date_sale}}</h2>
@@ -52,12 +54,16 @@
 			{% endfor %}
             <h1> Ваша недвижимость : </h1>
 			<div class="container">
-				{% for realty in user_realtys %}
-				<div class="realtys_list">
-					<a href="buy/{{realty.id}}">{{ realty.title }} - {{ realty.price }} руб.</a>
+				<!--  Вывод списка недвижимости в собственности  -->
 
+				<div class="realtys_list">
+					{% for realty in user_realtys %}
+					<a href="buy/{{realty.id}}" style="font-size:1.5em;text-decoration: none">{{loop.index}} -    {{ realty.title }} - {{ realty.price }} руб.</a>
+					<br>
+					<br>
+					{% endfor %}
 				</div>
-				{% endfor %}
+
 			</div>
         </div>
     </div>

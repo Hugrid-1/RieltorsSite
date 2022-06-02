@@ -133,7 +133,7 @@ h5, h6          { font-weight: bolder }
     
     width: 50%; /* Could be more or less, depending on screen size */
 }
-input[type=text], input[type=password] {
+input[type=text], input[type=password],input[type=email] {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;

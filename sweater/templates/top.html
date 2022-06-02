@@ -41,16 +41,20 @@
     <div class="table_wrapper">
         <table class="table">
             <thead>
+			<!--  Столбцы таблицы  -->
                 <th>Пользователь</th>
                 <th>Количество квартир в наличии</th>
             </thead>
             <tbody>
+			<!--  Заполение данными  -->
             {% for user in topUserList %}
                 <tr>
                     <td>
+						<!--  Логин пользователя  -->
                         {{user.login}}
                     </td>
                     <td>
+						<!--  Количество недвижимости  -->
                         {{user.realtycount}}
                     </td>
                 </tr>

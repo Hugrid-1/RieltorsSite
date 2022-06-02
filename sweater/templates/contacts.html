@@ -17,8 +17,8 @@
 <section class="hero">
 		<header>
 			<div class="wrapper">
-				<a href="#"><img src="../static/images/logo.png" class="logo" alt="" titl=""/></a>
-				<a href="#" class="hamburger"></a>
+				<a href="{{url_for('mainPage')}}"><img src="../static/images/logo.png" class="logo" alt="" titl=""/></a>
+				<a href="{{url_for('mainPage')}}" class="hamburger"></a>
 				<nav>
 					<ul>
 						<li><a href="catalog">Каталог</a></li>
@@ -30,7 +30,7 @@
 						<li><a href="contacts">Контакты</a></li>
 					</ul>
 					{% if current_user.is_authenticated %}
-					<a href="account" class="profile_btn">{{ current_user.login }}</a>
+					<a href="{{url_for('profilePage')}}" class="profile_btn">{{ current_user.login }}</a>
 					<a onclick="" style="width:auto;" href="logout" class="logout_btn">Выйти из аккаунта</a>
 					{% else %}
 					<a onclick="document.getElementById('id01').style.display='block'" style="width:auto;" href="{{url_for('loginPage')}}" class="login_btn">Войти</a>
